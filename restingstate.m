@@ -23,7 +23,7 @@ cfg.lpfreq = 60;
 cfg.reref = 'yes';
 cfg.refchannel = 'all';
 cfg.bsfilter = 'yes';
-cfg.bsfreq = [49 51]; %filter out 50Hz
+%cfg.bsfreq = [49 51]; %filter out 50Hz
 cleandata = ft_preprocessing(cfg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
