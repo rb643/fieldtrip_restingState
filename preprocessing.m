@@ -9,19 +9,21 @@ epochLength = 4;
 cfg = [];
 cfg.dataset = 'EG-SUB-0001-RS.bdf';
 cfg.trialdef.eventtype = 'STATUS';
-cfg.trialdef.eventvalue = [102 103]; % define eyes open (100 101), eyes closed (102 103)
+cfg.trialdef.eventvalue = [102 103]; % define eyes open (100 101), eyes closed (102 103), but check manually
 cfg.trialdef.prestim = -5; %don't take the whole one minute
 cfg.trialdef.poststim = 55;
 cfg = ft_definetrial(cfg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% preprocessing settings
-cfg.channel = [1:64];
+cfg.channel = [1:64] % don't think I need to exclude this here?
 cfg.continuous = 'yes';
 cfg.demean    = 'yes';
-%cfg.detrend = 'yes';
+cfg.detrend = 'yes';
 cfg.lpfreq = 60;
-cfg.reref = 'no'; %do not rereference until you have checked all channels
+cfg.reref = 'EXG6'; %rereference to mastoid
+cfg.bsfilter = 'yes' % use the bs filter
+cfg.bsfilter = '48 52'
 cleandata = ft_preprocessing(cfg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,12 +65,6 @@ cfg_cut.length = epochLength;
 cfg_cut.overlap = 0;
 artifact_cleandata = rmfield(artifact_cleandata,'trialinfo'); % clear the original trialinfo to be able to redefine
 epocheddata = ft_redefinetrial(cfg_cut, artifact_cleandata); % cut it into little pieces
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% detrend all epochs
-cfg_pp = [];
-cfg_pp.detrend = 'yes';
-epocheddata = ft_preprocessing(cfg_pp, epocheddata);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OPTIONAL visual inspection of trials
