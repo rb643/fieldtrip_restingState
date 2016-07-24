@@ -1,9 +1,12 @@
 % function to compute various BCT/graph metric on a set of adjacency matrices
 
-function [Results] = rb_EEG_Network(matrices, subids, path2save, mask, costlimit, nRand, prefix, TAKEABS)
+function [Results] = rb_EEG_Network(matrices, subids, path2save, mask, step, costlimit, nRand, prefix, TAKEABS)
 % matrices          -       3D matrix of subs*nodes*nodes
 % subids            -       list of subject ID's (or filenames)
 % path2save         -       directory where to store the output
+% step              -       the number of edges to add at each 'step' before recalculating the
+%                           network measures. This will set the density of datapoints on the curves in
+%                           the final result
 % mask              -       1D vector of grouplabels/subject indices
 %                           1=control 2=patient, might be useful later on
 % costlimit         -       highest cost to loop over
@@ -38,7 +41,7 @@ for isub = 1:length(matrices,1)
         ConnMat=abs(ConnMat);      %%%%%%%%%%%%%%%%%%%%%%%%% TAKING ABS VALUE
     end
     ConnMat(1:n+1:n*n)=1; %%%%%%%%%%%%%%%%%%%%%%%%% ONES ON DIAGONAL
-    Results.ConnMat = ConnMat; % store correlation matrix
+    Results{i}.ConnMat = ConnMat; % store correlation matrix
     
     %Create MST (the minimum spanning tree of the network
     disp('Calculating MST');
@@ -178,7 +181,12 @@ for isub = 1:length(matrices,1)
     eval(sprintf('Results_%s = s;',prefix));
     
     %Save the structure in a .mat file
-    fname = fullfile(path2save,strcat(prefix,filename,'mat'));
-    save(fname,s);
+    fname = fullfile(path2save,strcat(prefix,s.filename,'mat'));
+    save(fname,'s');
     
+    Results{i}.s = s;
+end
+
+savename = fullfile(path2save,'Results.mat');
+save(savename,'Results');
 end
