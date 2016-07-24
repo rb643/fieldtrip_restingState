@@ -16,8 +16,13 @@ function [Results] = rb_EEG_Network(matrices, subids, path2save, mask, costlimit
 
 for isub = 1:length(matrices,1)
     
-    [s.path, s.filename, s.extension] = fileparts(subids(isub,:));
-    ConnMat = matrices(isub,:,:)
+    sep =  cell2mat(strfind(subids(isub,:),'.')); % get the name seperator
+    name = subids(isub,:)
+    name = name{1};
+    s.filename = name(1:sep-1)
+ 
+    ConnMat = squeeze(matrices(isub,:,:));
+    ConnMat = rb_makeSymmetric(ConnMat);
     
     %Declare the variables to store all measures that will be used
     s.cost=[]; s.k=[]; s.a=[]; s.arand=[]; s.M=[]; s.Mrand=[];
@@ -103,7 +108,7 @@ for isub = 1:length(matrices,1)
     
     %Now add edges in correct order until all possible edges exist
     disp('Starting with MST and adding edges over a range of Costs');
-    while (enum < COSTLIMIT*n*(n-1)/2)
+    while (enum < costlimit*n*(n-1)/2)
         enum;
         % if edge wasn't initially included in MST
         if A(row(t),col(t)) == 0
