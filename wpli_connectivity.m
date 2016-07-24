@@ -4,6 +4,8 @@ function [] = rb_EEG_Connectivity (directory)
 cd(directory);
 subs = ls('*.mat');
 nsubs = size(subs,1);
+subids = subs;
+save('subids.mat',subs);
  
 for i = 1:nsubs
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
