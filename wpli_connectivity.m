@@ -1,17 +1,30 @@
 %% standard functions to load preprocessed fieldtrip mat-files and create WPLI matrices
-function [] = rb_EEG_Connectivity (directory)
+function [] = rb_EEG_Connectivity(directory, Example_figure)
  
 cd(directory);
 subs = ls('*.mat');
 nsubs = size(subs,1);
 subids = subs;
-save('subids.mat',subs);
- 
+save('subids.mat','subs');
+
+donedir = fullfile(directory,'done')
+if exist(donedir,'dir')
+    disp('Output folder exists');
+else
+    disp('Creating output folder');
+    mkdir(donedir);
+end
+    
+h = waitbar(0,'Running Network Analysis'); 
 for i = 1:nsubs
+    
+    waitbar(i/nsubs);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% LOAD THE DATA
     [path, filename, extension] = fileparts(subs(i,:));
     load(subs(i,:));
+    
+    disp(strcat('Working on file ', filename));
     
     %% Set up frequency split using wavelet
     cfg_freq = [];
@@ -125,10 +138,15 @@ for i = 1:nsubs
          network_all(i,:,:) = squeeze(mean(conn.all.wplispctrm,3));    
     
     %% Do some clean-up and save
-    savename = strcat(filename,'_conn');
+    savename = strcat('w_',filename,'.mat');
     save(savename, 'conn');
-    clearvars -except subs nsubs directory network_delta network_theta network_alpha network_beta network_gamma network_all;
-    
+    movefile(savename, fullfile(donedir,savename));
+    movefile(subs(i,:), fullfile(donedir));
+      
 end
+close(h)
+
+save(fullfile(donedir,'Results.mat'), 'network_all', 'network_alpha', 'network_beta', 'network_delta', 'network_gamma', 'network_theta','subs');
+
 end
 
