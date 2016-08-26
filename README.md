@@ -23,7 +23,7 @@ There are 3 main scripts to get all of this done:
 ## Dependencies
 There are a few external scripts/toolboxes that these three wrapper scripts depend upon. Apart from the obvious need to have fieldtrip installed you will also need the following tools for the Networks script to work:
 * A custom function to make your adjacency matrices symmetric that can be found [here] (https://github.com/rb643/fieldtrip_restingState/blob/master/rb_makeSymmetric.m). Annoyingly sometimes there are some very very small rounding errors in matlabs corrcoef or affiliated functions that make it look like the adjacency matrix is not symmetric. This will make all subsequent analysis fail so I've included a small script that ensures your input is symmetric
-* The Brain Connectivity Toolbox (BCT) that you can find [here (https://sites.google.com/site/bctnet/). This is the main toolbox used for computing any and all graph metrics. Fieldtrip does come with this toolbox included, but it might be worth to have the latest and most up to date version separate as well.
+* The Brain Connectivity Toolbox (BCT) that you can find [here] (https://sites.google.com/site/bctnet/). This is the main toolbox used for computing any and all graph metrics. Fieldtrip does come with this toolbox included, but it might be worth to have the latest and most up to date version separate as well.
 
 ### Platform note
 Although this should be platform independent it has only been tested on a 64-bit Windows 8 Pro systems, with Matlab 2014B. If possible I have attempted to avoid using system specific file separators, but there is always a chance one has slipped through and makes the script throw errors.
