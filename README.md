@@ -13,6 +13,8 @@ This wiki is mainly intended to provide some minimal guidance on how to use the 
 8. Calculate the weighted phase lag index using wavelet decomposition for each of the 5 frequency bands separately
 9. Calculate various graph metrics from the WPLI adjacency matrices
 
+Steps 1-7 are useful and partly necessary to run manually (e.g. to check trial information and select ICA components mostly, but also to do a quick quality check of your data by visual inspection). Steps 8 and 9 can be (and are currently) automated and are best run at the end of your data collection phase when you are ready to start pre-processing.
+
 ## What assumptions are made
 * You are using a BioSemi ActiveTwo 64 Channel recording system
 * You are using the external channels on the BioSemi to get an additional reference
@@ -42,3 +44,7 @@ There are a few external scripts/toolboxes that these three wrapper scripts depe
 
 ### Platform note
 Although this should be platform independent it has only been tested on a 64-bit Windows 8 Pro systems, with Matlab 2014B. If possible I have attempted to avoid using system specific file separators, but there is always a chance one has slipped through and makes the script throw errors.
+
+### Still to do
+* Create some statistical analysis scripts
+* Add in some plotting for visual inspection
