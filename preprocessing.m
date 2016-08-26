@@ -1,27 +1,29 @@
 
 %% Basic pre-processing steps for resting state funtcional connectivitiy analysis of BIOSEMI EEG data
-
 %% globals
 epochLength = 4;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% load data, triggers and define trials
+filename = '' % set the filename without extension (to enable automatic saving afterwards)
 cfg = [];
-cfg.dataset = 'EG-SUB-0001-RS.bdf';
+cfg.dataset = strcat(filename,'.bdf');
 cfg.trialdef.eventtype = 'STATUS';
-cfg.trialdef.eventvalue = [102 103]; % define eyes open (100 101), eyes closed (102 103)
+cfg.trialdef.eventvalue = [102 103]; % define eyes open (100 101), eyes closed (102 103), but check manually
 cfg.trialdef.prestim = -5; %don't take the whole one minute
 cfg.trialdef.poststim = 55;
 cfg = ft_definetrial(cfg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% preprocessing settings
-cfg.channel = [1:64];
+cfg.channel = [1:64] % don't think I need to exclude this here, but do it anyway
 cfg.continuous = 'yes';
 cfg.demean    = 'yes';
-%cfg.detrend = 'yes';
+cfg.detrend = 'yes';
 cfg.lpfreq = 60;
-cfg.reref = 'no'; %do not rereference until you have checked all channels
+cfg.reref = 'EXG6'; %rereference to mastoid reference
+cfg.bsfilter = 'yes' % use the bs filter
+cfg.bsfilter = '48 52' % filter out potential line noise
 cleandata = ft_preprocessing(cfg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,7 +31,6 @@ cleandata = ft_preprocessing(cfg);
 cfg_res = [];
 cfg_res.resamplefs = 1024;
 cleandata = ft_resampledata(cfg_res, cleandata);
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% OPTIONAL visual inspection (easier to see before reslicing trials)
@@ -40,6 +41,7 @@ dummy = ft_rejectvisual(cfg_vis,cleandata);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%.
 %% OPTIONAL: channel repair if on visual inspection any bad channels are obvious
+% try to avoid as much as possible since channel repairs effect ICA efficacy
 % Get nearest neighbours
 cfg_rep                  = [];
 cfg_rep.method           = 'template'
@@ -53,7 +55,7 @@ cfg_int.method               = 'nearest';
 cfg_int.neighbours           = neighbours;
 cfg_int.neighbourdist        = 0.13; %not too sure about this?
 artifact_cleandata           = ft_channelrepair(cfg_int,cleandata)
-% or
+% or, if no channels are to be repaired
 artifact_cleandata           = cleandata;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,12 +65,6 @@ cfg_cut.length = epochLength;
 cfg_cut.overlap = 0;
 artifact_cleandata = rmfield(artifact_cleandata,'trialinfo'); % clear the original trialinfo to be able to redefine
 epocheddata = ft_redefinetrial(cfg_cut, artifact_cleandata); % cut it into little pieces
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% detrend all epochs
-cfg_pp = [];
-cfg_pp.detrend = 'yes';
-epocheddata = ft_preprocessing(cfg_pp, epocheddata);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OPTIONAL visual inspection of trials
@@ -118,6 +114,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Do some clean-up
-clearvars -except data_iccleaned
-save('sub_001.mat', 'data_iccleaned')
+savename = strcat('pp_',filename,'.mat');
+save(savename, 'data_iccleaned');
+clearvars -except epochLength
 clc
