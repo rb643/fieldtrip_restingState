@@ -13,6 +13,17 @@ This wiki is mainly intended to provide some minimal guidance on how to use the 
 8. Calculate the weighted phase lag index using wavelet decomposition for each of the 5 frequency bands separately
 9. Calculate various graph metrics from the WPLI adjacency matrices
 
+## What assumptions are made
+* You are using a BioSemi ActiveTwo 64 Channel recording system
+* You are using the external channels on the BioSemi to get an additional reference
+  * In our case (and hence in the current script) channel 6 is used to record a mastoid reference
+* You have included trigger codes for the eyes-open and eyes-closed starting point
+  * In our case we have 102 and 103 as codes for the eyes-closed triggers and 100 and 101 for eye-open
+* We do not use the full minute but the middle 50s to avoid including the transition from eyes-open to eyes-closed
+* We resegement the recording into 4s epochs to somewhat articificially create trials that are need for WPLI analyses later on (i.e. we need to be able to average over multiple segments)
+* Our pre-processing settings are fairly basic and easy to adjust in the script
+
+
 ## What scripts do what
 There are 3 main scripts to get all of this done:
 
@@ -24,6 +35,10 @@ There are 3 main scripts to get all of this done:
 There are a few external scripts/toolboxes that these three wrapper scripts depend upon. Apart from the obvious need to have fieldtrip installed you will also need the following tools for the Networks script to work:
 * A custom function to make your adjacency matrices symmetric that can be found [here] (https://github.com/rb643/fieldtrip_restingState/blob/master/rb_makeSymmetric.m). Annoyingly sometimes there are some very very small rounding errors in matlabs corrcoef or affiliated functions that make it look like the adjacency matrix is not symmetric. This will make all subsequent analysis fail so I've included a small script that ensures your input is symmetric
 * The Brain Connectivity Toolbox (BCT) that you can find [here] (https://sites.google.com/site/bctnet/). This is the main toolbox used for computing any and all graph metrics. Fieldtrip does come with this toolbox included, but it might be worth to have the latest and most up to date version separate as well.
+
+### Notes:
+* It is strongly recommended that after you've loaded your data with the first snippet of code in the preprocessing batch that you check whether your trial definitions are accurate by opening the cfg data structure and checking the trl timing field. If you've messed up the trigger codes somehow you will see straigh away that there are either to many trials or that trials are shorter than expected. Note also that this field just give you the number of datapoints not miliseconds, so if you have recorded at a sampling rate higher than 1024Hz you will likely see that the segment look 'longer'.
+* Whatever you change in the settings: be consistent across your dataset!
 
 ### Platform note
 Although this should be platform independent it has only been tested on a 64-bit Windows 8 Pro systems, with Matlab 2014B. If possible I have attempted to avoid using system specific file separators, but there is always a chance one has slipped through and makes the script throw errors.
