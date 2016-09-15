@@ -4,7 +4,7 @@
 This wiki is mainly intended to provide some minimal guidance on how to use the scripts provided in this section of my github. These scripts are to be used for analysis of resting state EEG data that was recorded on a 64-channel BioSemi ActiveTwo system with external electrode 6 (placed on the mastoid) as a reference electrode. It assumes trigger codes are used for eyes-closed and eyes-open segments and presently only uses eyes-closed segments. The currently assumed pre and post-processing steps are as follows:
 
 1. Trials and triggers codes are read and only eyes-closed segments are selected
-2. Very basic pre-processing includes: demeaning, detrending, low-pass filter below 60Hz, re-referencing to mastoid reference, discrete fourier filtering of possible 50Hz line-noise and resampling to 256Hz.
+2. Very basic pre-processing includes: demeaning, detrending, low-pass filter below 60Hz, re-referencing to mastoid reference, bandpass filtering of possible 50Hz line-noise and resampling to 256Hz.
 3. Optional visual inspection after basic pre-processing
 4. Optional reconstruction of noisy channels (though only use this if a channel is absolutely rubbish!)
 5. Removal of noise using ICA decomposition and visual inspection of resulting components
