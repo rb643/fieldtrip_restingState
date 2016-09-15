@@ -20,9 +20,8 @@ cfg.demean    = 'yes';
 cfg.detrend = 'yes';
 cfg.lpfreq = 60;
 cfg.reref = 'EXG6'; %rereference to mastoid reference
-cfg.bsfilter = 'no' % don't use the bs filter
-cfg.dftfilter = 'yes' % use the dft filter
-cfg.dftfreq = [50];
+cfg.bsfilter = 'yes' % don't use the bs filter
+cfg.bsfreq = [48 52] % remove line-noise
 cleandata = ft_preprocessing(cfg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
