@@ -44,7 +44,7 @@ There are a few external scripts/toolboxes that these three wrapper scripts depe
 * Whatever you change in the settings: be consistent across your dataset!
 
 ### Platform note
-Although this should be platform independent it has only been tested on a 64-bit Windows 8 Pro systems, with Matlab 2014B. If possible I have attempted to avoid using system specific file separators, but there is always a chance one has slipped through and makes the script throw errors.
+Although this should be platform independent it has only been tested on a 64-bit Windows 8 Pro system and iOS 10.11.6 (El Capitan), with Matlab 2014B. If possible I have attempted to avoid using system specific file separators, but there is always a chance one has slipped through and makes the script throw errors.
 
 ### Still to do
 * Create some statistical analysis scripts
