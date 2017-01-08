@@ -82,6 +82,6 @@ end
 
 close(h)
 
-save(fullfile(donedir,'Results.mat', Result);
+save(fullfile(donedir,'Results.mat'), 'Result');
 
 end
