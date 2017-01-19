@@ -5,7 +5,7 @@
 Lower triangle shows p-values that resulting from a groupwise permutation test of each connection. The upper triangle indicates which connections survive FDR correction for multiple comparisons.
 
 ### Delta Band WPLI Connectivity
-![Delta](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Matrix_Delta.tif)
+![Delta](https://plot.lu/~rb643/18.embed)
 
 ### Theta Band WPLI Connectivity
 ![Theta](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Matrix_Theta.tif)
