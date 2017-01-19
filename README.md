@@ -51,3 +51,9 @@ Although this should be platform independent it has only been tested on a 64-bit
 ### Still to do
 * Create some statistical analysis scripts
 * Add in some plotting for visual inspection
+
+## Some example figures from the initial analysis:
+# Delta Band WPLI Connectivity
+Lower triangle shows p-values that resulting from a groupwise permutation test of each connection. The upper triangle indicates which connections survive FDR correction for multiple comparisons.
+![Delta](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Matrix_Delta.tif)
+
