@@ -2,7 +2,7 @@
 
 ## Comparing pairwise connections within every band
 
-Lower triangle shows p-values that resulting from a groupwise permutation test of each connection. The upper triangle indicates which connections survive FDR correction for multiple comparisons.
+Lower triangle shows p-values that resulting from a groupwise permutation test of each connection. The upper triangle indicates which connections survive FDR correction for multiple comparisons. Clicking on the figures opens an embeded file that can be navigated.
 
 ### Delta Band WPLI Connectivity
 <div>
