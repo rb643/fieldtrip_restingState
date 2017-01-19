@@ -16,13 +16,20 @@ Lower triangle shows p-values that resulting from a groupwise permutation test o
     <script data-plotly="rb643:23" sharekey-plotly="Rf1zkStv5LjjHszQPrdpNm" src="https://plot.ly/embed.js" async></script>
 </div>
 
-
 ### Alpha Band WPLI Connectivity
-![Alpha](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Matrix_Alpha.tif)
+<div>
+    <a href="https://plot.ly/~rb643/26/?share_key=Rf1zkStv5LjjHszQPrdpNm" target="_blank" title="Alpha WPLI" style="display: block; text-align: center;"><img src="https://plot.ly/~rb643/26.png?share_key=Rf1zkStv5LjjHszQPrdpNm" alt="Alpha WPLI" style="max-width: 100%;width: 1500px;"  width="1500" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+    <script data-plotly="rb643:26" sharekey-plotly="Rf1zkStv5LjjHszQPrdpNm" src="https://plot.ly/embed.js" async></script>
+</div>
 
 ### Beta Band WPLI Connectivity
-![Beta](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Matrix_Beta.tif)
+<div>
+    <a href="https://plot.ly/~rb643/29/?share_key=Rf1zkStv5LjjHszQPrdpNm" target="_blank" title="Beta WPLI" style="display: block; text-align: center;"><img src="https://plot.ly/~rb643/29.png?share_key=Rf1zkStv5LjjHszQPrdpNm" alt="Beta WPLI" style="max-width: 100%;width: 1500px;"  width="1500" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+    <script data-plotly="rb643:29" sharekey-plotly="Rf1zkStv5LjjHszQPrdpNm" src="https://plot.ly/embed.js" async></script>
+</div>
 
 ### Gamma Band WPLI Connectivity
-![Gamma](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Matrix_Gamma.tif)
-
+<div>
+    <a href="https://plot.ly/~rb643/32/?share_key=Rf1zkStv5LjjHszQPrdpNm" target="_blank" title="Gamma WPLI" style="display: block; text-align: center;"><img src="https://plot.ly/~rb643/32.png?share_key=Rf1zkStv5LjjHszQPrdpNm" alt="Gamma WPLI" style="max-width: 100%;width: 1500px;"  width="1500" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+    <script data-plotly="rb643:32" sharekey-plotly="Rf1zkStv5LjjHszQPrdpNm" src="https://plot.ly/embed.js" async></script>
+</div>
