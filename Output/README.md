@@ -33,3 +33,8 @@ Lower triangle shows p-values that resulting from a groupwise permutation test o
     <a href="https://plot.ly/~rb643/32/?share_key=Rf1zkStv5LjjHszQPrdpNm" target="_blank" title="Gamma WPLI" style="display: block; text-align: center;"><img src="https://plot.ly/~rb643/32.png?share_key=Rf1zkStv5LjjHszQPrdpNm" alt="Gamma WPLI" style="max-width: 100%;width: 1500px;"  width="1500" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
     <script data-plotly="rb643:32" sharekey-plotly="Rf1zkStv5LjjHszQPrdpNm" src="https://plot.ly/embed.js" async></script>
 </div>
+
+## Graph theory analysis
+![Graph Metrics](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Graphs.tif)
+
+
