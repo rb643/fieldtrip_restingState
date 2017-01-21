@@ -1,4 +1,8 @@
 # Output from the initial analysis
+## Asymmetry analysis
+The figure below shows topological plots of the median power spectral density in both groups as well as boxplots indicating the ratio of frontal asymmetry in every frequency band for each sample.
+
+![Asymmetry](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Power.tif)
 
 ## Circular chord diagram of networks thresholded at 10% density
 WPLI values for all between electrode connections that survive a threshold of 10% above the minimal spanning tree. Connections are shaded according to their strength with blue connections indication a negative relationship and red indicating a positive one. All right-hemisphere electrodes are marked in yellow whearas all left-hemisphere electrodes are marked in blue. Central or midline electrodes are marked grey. All nodes in the cicrular diagram are scaled according to the number of connections they have that survive the 10% threshold.
