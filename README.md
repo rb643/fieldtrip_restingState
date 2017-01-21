@@ -41,6 +41,9 @@ There are a few external scripts/toolboxes that these wrapper scripts depend upo
 * A custom function to make your adjacency matrices symmetric that can be found [here] (https://github.com/rb643/fieldtrip_restingState/blob/master/rb_makeSymmetric.m). Annoyingly sometimes there are some very very small rounding errors in matlabs corrcoef or affiliated functions that make it look like the adjacency matrix is not symmetric. This will make all subsequent analysis fail so I've included a small script that ensures your input is symmetric
 * The Brain Connectivity Toolbox (BCT) that you can find [here] (https://sites.google.com/site/bctnet/). This is the main toolbox used for computing any and all graph metrics. Fieldtrip does come with this toolbox included, but it might be worth to have the latest and most up to date version separate as well.
 
+## Initial results
+Some initial results are uploaded [here] (https://github.com/rb643/fieldtrip_restingState/blob/master/Output/README.md). 
+
 ### Notes:
 * It is strongly recommended that after you've loaded your data with the first snippet of code in the preprocessing batch that you check whether your trial definitions are accurate by opening the cfg data structure and checking the trl timing field. If you've messed up the trigger codes somehow you will see straigh away that there are either to many trials or that trials are shorter than expected. Note also that this field just give you the number of datapoints not miliseconds, so if you have recorded at a sampling rate higher than 1024Hz you will likely see that the segment look 'longer'.
 * Whatever you change in the settings: be consistent across your dataset!
@@ -50,4 +53,4 @@ Although this should be platform independent it has only been tested on a 64-bit
 
 ### Still to do
 * Create some statistical analysis scripts
-* Add in some plotting for visual inspection
+* Upload scripts for visualizations
