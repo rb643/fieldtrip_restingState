@@ -1,6 +1,6 @@
 # Some example output files from the initial analysis
 ## Circular cord diagram of networks thresholded at 10% density
-WPLI values for all between electrode connections that survive a threshold of 10% above the minimal spanning tree. Connections are shaded according to their strength with blue connections indication a negative relationship and red indicating a positive one.
+WPLI values for all between electrode connections that survive a threshold of 10% above the minimal spanning tree. Connections are shaded according to their strength with blue connections indication a negative relationship and red indicating a positive one. All right-hemisphere electrodes are marked in yellow whearas all left-hemisphere electrodes are marked in blue. Central or midline electrodes are marked grey. All nodes in the cicrular diagram are scaled according to the number of connections they have that survive the 10% threshold.
 
 ![Networks](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/CircularNetwork.tif)
 
@@ -41,6 +41,8 @@ Lower triangle shows p-values that resulting from a groupwise permutation test o
 </div>
 
 ## Graph theory analysis
+The figure below present the 4 main whole brain graph metrics that were investigated across a density of 0-30% above the minimal spanning tree for all the five frequency bands.
+
 ![Graph Metrics](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Graphs.tif)
 
 
