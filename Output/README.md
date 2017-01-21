@@ -41,7 +41,7 @@ Lower triangle shows p-values that resulting from a groupwise permutation test o
 </div>
 
 ## Graph theory analysis
-The figure below present the 4 main whole brain graph metrics that were investigated across a density of 0-30% above the minimal spanning tree for all the five frequency bands.
+The figure below presents the 4 main whole brain graph metrics that were investigated across a density of 0-30% above the minimal spanning tree for all the five frequency bands. Lines represent group means and shaded errors indicate the standard error of the mean. Permutations tests across groups revealed no consistent differences that survived multiple comparison correction (correcting for each cost point at which an analysis was conducted). 
 
 ![Graph Metrics](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/Graphs.tif)
 
