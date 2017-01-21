@@ -1,8 +1,14 @@
 # Some example output files from the initial analysis
+## Circular cord diagram of networks thresholded at 10% density
+WPLI values for all between electrode connections that survive a threshold of 10% above the minimal spanning tree. Connections are shaded according to their strength with blue connections indication a negative relationship and red indicating a positive one.
+
+![Networks](https://raw.githubusercontent.com/rb643/fieldtrip_restingState/master/Figures/CircularNetwork.tif)
+
+
 
 ## Comparing pairwise connections within every band
-
 Lower triangle shows p-values that resulting from a groupwise permutation test of each connection. The upper triangle indicates which connections survive FDR correction for multiple comparisons. Clicking on the figures opens an embeded file that can be navigated.
+
 
 ### Delta Band WPLI Connectivity
 <div>
