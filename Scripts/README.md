@@ -6,3 +6,5 @@
 #### Script to compare any set of matrices using permutation testing and FDR multiple comparison correction
 * [This] (https://github.com/rb643/fieldtrip_restingState/blob/master/Scripts/rb_compareMatrices.m) script can be used to compare any set of two matrices. It run pairwise comparisons for each cell and return a matrix with all p-values, the threshold for FDR correction and a mask with all cells that pass that correction.
 
+#### Set of R commands to visualize matrices
+* [This] (https://github.com/rb643/fieldtrip_restingState/blob/master/Scripts/rb_plotting.R) script contains some R commands to visualize matrices as either heatmaps or chord diagrams. The latter uses the circlize package found [here] (https://cran.r-project.org/web/packages/circlize/index.html).
