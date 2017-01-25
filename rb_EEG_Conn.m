@@ -23,7 +23,7 @@ else
     mkdir(donedir);
 end
 
-h = waitbar(0,'Running WPLI Analysis');
+h = waitbar(0,'Running Network Analysis');
 for i = 1:nsubs
     
     waitbar(i/nsubs);
