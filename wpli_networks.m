@@ -1,6 +1,6 @@
 % function to compute various BCT/graph metric on a set of adjacency matrices
 
-function [Results] = rb_EEG_Network(matrices, subids, path2save, mask, step, costlimit, nRand, prefix, TAKEABS)
+function [Results] = rb_EEG_Network(matrices, subids, path2save, step, costlimit, nRand, prefix, TAKEABS)
 % matrices          -       3D matrix of subs*nodes*nodes
 % subids            -       list of subject ID's (or filenames)
 % path2save         -       directory where to store the output
@@ -14,16 +14,15 @@ function [Results] = rb_EEG_Network(matrices, subids, path2save, mask, step, cos
 % prefix            -       prefix for filenaming
 % TAKEABS           -       use binary matrices
 
-%[Results] = rb_EEG_Network(matrices, subids, '/Output/Nets/', mask, 0.3, 100, 'Net_', 1);
+%[Results] = rb_EEG_Network(matrices, subids, '', 10, 0.3, 100, 'Net_', 1);
 
 
-for isub = 1:length(matrices,1)
+for isub = 1:size(matrices,1)
     
-    sep =  cell2mat(strfind(subids(isub,:),'.')); % get the name seperator
-    name = subids(isub,:)
-    name = name{1};
-    s.filename = name(1:sep-1)
- 
+    sep =  strfind(subids(isub,:),'.'); % get the name seperator
+    name = subids(isub,:);
+    s.filename = name(1:sep-1);
+    
     ConnMat = squeeze(matrices(isub,:,:));
     ConnMat = rb_makeSymmetric(ConnMat);
     
@@ -41,11 +40,29 @@ for isub = 1:length(matrices,1)
         ConnMat=abs(ConnMat);      %%%%%%%%%%%%%%%%%%%%%%%%% TAKING ABS VALUE
     end
     ConnMat(1:n+1:n*n)=1; %%%%%%%%%%%%%%%%%%%%%%%%% ONES ON DIAGONAL
-    Results{i}.ConnMat = ConnMat; % store correlation matrix
+    Results{isub}.ConnMat = ConnMat; % store correlation matrix
     
+    %% compute some inter and intra hemisphere connections
+    % select left and righ electrodes
+    left = [1:27];
+    right = [34:36 39:46 49:64];
+    
+    % compute interhemisheric connectitivy
+    Results{isub}.InterAdj = mean(mean(abs(ConnMat(left,right))));
+    Results{isub}.IntraL = mean(mean(abs(ConnMat(left,left))));
+    Results{isub}.IntraR = mean(mean(abs(ConnMat(right,right))));
+  
     %Create MST (the minimum spanning tree of the network
     disp('Calculating MST');
     MST=kruskal_mst(sparse(sqrt(2*(1-ConnMat))));
+    
+    ConnMat=triu(ConnMat,1);
+    ind = find(ConnMat+triu(ones(n,n),1)); %%%TRICK: necessary in case there are zeros in the matrix
+    Clist = ConnMat(ind);
+    Cnonz = length(Clist);
+    [ClistSort, IX] = sort(Clist,'descend');
+    [row col]=ind2sub([n,n],ind(IX));
+    dd= length(Clist);
     
     %Store Initial MST in the adjacency matrix A that defines the network
     A=full(MST);
@@ -133,6 +150,7 @@ for isub = 1:length(matrices,1)
                 %%%%%%%%%%% Degrees
                 deg=degrees_und(A);
                 degr=degrees_und(R);
+                s.deg(g,:) = deg;
                 s.k(g)=mean(deg);
                 
                 %%%%%%%%%%%% Assortativity
@@ -172,21 +190,47 @@ for isub = 1:length(matrices,1)
             end % if mod(enum, step) == 0
         end % if A(row(t),col(t)) == 0
         t=t+1;
+        
     end % while
     
     %% Save
     %Transfer the structure containing the measures into a correctly named
     %variable for saving.
     disp('Saving Results');
-    eval(sprintf('Results_%s = s;',prefix));
+    eval(sprintf('Net_Results_%s = s;',prefix));
     
     %Save the structure in a .mat file
     fname = fullfile(path2save,strcat(prefix,s.filename,'mat'));
     save(fname,'s');
     
-    Results{i}.s = s;
+    Results{isub}.s = s;
+    
+    Combined.cost = s.cost;
+    Combined.deg(isub,:) = s.k;
+    Combined.locdeg(isub,:,:) = s.deg;
+    Combined.a(isub,:) = s.a;
+    Combined.arand(isub,:) = s.arand;
+    Combined.L(isub,:) = s.L;
+    Combined.Lrand(isub,:) = s.Lrand;
+    Combined.M(isub,:) = s.M;
+    Combined.Mrand(isub,:) = s.Mrand;
+    Combined.E(isub,:) = s.E;
+    Combined.Erand(isub,:) = s.Erand;
+    Combined.CE(isub,:) = s.CE;
+    Combined.CErand(isub,:) = s.CErand;
+    Combined.bc(isub,:) = s.bc;
+    Combined.bcrand(isub,:) = s.bcrand;
+    Combined.C(isub,:) = s.C;
+    Combined.Crand(isub,:) = s.Crand;
+    Combined.SW(isub,:) = s.Sigma;
+    Combined.InterAdj(isub,:) = mean(mean(ConnMat(left,right)));
+    Combined.IntraL(isub,:) = mean(mean(ConnMat(left,left)));
+    Combined.IntraR(isub,:) = mean(mean(ConnMat(right,right)));
 end
 
-savename = fullfile(path2save,'Results.mat');
+savename = fullfile(path2save,strcat(prefix,'Results.mat'));
 save(savename,'Results');
+
+savename = fullfile(path2save,strcat(prefix,'ResultsCombined.mat'));
+save(savename,'Combined');
 end
