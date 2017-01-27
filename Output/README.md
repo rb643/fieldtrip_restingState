@@ -11,7 +11,7 @@ WPLI values for all between electrode connections that survive a threshold of 10
 
 
 ## Comparing pairwise connections within every band
-The figures below show the outcome of pairwise permutations for every connection across groups and across the five frequency bands. Lower triangles shows p-values of each connection comparison. The upper triangle indicates which connections survive FDR correction for multiple comparisons. Clicking on the figures opens an embeded file that can be navigated.
+The figures below show the outcome of pairwise permutations for every connection across groups and across the five frequency bands. Thus, every cell in this matrix represents one connection between two electrodes. Lower triangles shows p-values of each permutation comparison. The upper triangle indicates which connections survive FDR correction for multiple comparisons (with one indicating a significant difference and zeros indicating no significant differences).  Clicking on the figures opens an embeded file that can be navigated.
 
 ### Delta Band WPLI Connectivity
 <div>
