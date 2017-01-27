@@ -19,6 +19,8 @@ The figures below show the outcome of pairwise permutations for every connection
     <script data-plotly="rb643:18" sharekey-plotly="Rf1zkStv5LjjHszQPrdpNm" src="https://plot.ly/embed.js" async></script>    
 </div>
 
+The median difference between the groups can be found [here] (https://plot.ly/~rb643/37/). This is calculates as the median of the autism group minus the median of the neurotypical group and hence negative values represent 'underconnectivity' in the autism group and vice versa.
+
 ### Theta Band WPLI Connectivity
 <div>
     <a href="https://plot.ly/~rb643/23/?share_key=Rf1zkStv5LjjHszQPrdpNm" target="_blank" title="Theta WPLI" style="display: block; text-align: center;"><img src="https://plot.ly/~rb643/23.png?share_key=Rf1zkStv5LjjHszQPrdpNm" alt="Theta WPLI" style="max-width: 100%;width: 1500px;"  width="1500" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
