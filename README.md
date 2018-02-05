@@ -22,6 +22,7 @@ Steps 1-5 are useful and partly necessary to run manually (e.g. to check trial i
   * In our case (and hence in the current script) channel 6 is used to record a mastoid reference
 * You have included trigger codes for the eyes-open and eyes-closed starting point
   * In our case we have 102 and 103 as codes for the eyes-closed triggers and 100 and 101 for eye-open
+  * The full script we used to run resting state pre-processing can be found [here] (https://github.com/rb643/fieldtrip_restingState/blob/master/Scripts/resting_state.m) and is based on a psychtoolbox implementation using a startech parallel port card to synch with the BioSemi system
 * We do not use the full minute but the middle 50s to avoid including the transition from eyes-open to eyes-closed
 * Since we don't look at any frequencies above 60Hz we can downsample to 256Hz to speed up processing
 * We resegement the recording into 4s epochs to somewhat articificially create trials that are need for WPLI analyses later on (i.e. we need to be able to average over multiple segments)
